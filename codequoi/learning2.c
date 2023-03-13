@@ -10,6 +10,7 @@
 
 // flags para compilação
 // -pthread
+// cc -pthread -fsanitize=thread learning2.c -o learning2 && ./learning2
 
 // criando um nova thread protótipo
 // int pthread_create(pthread_t *restrict thread, const pthread_attr_t *restrict attr, void *(*start_routine)(void *), void *restrict arg);
@@ -20,7 +21,7 @@
 // RETORNA 0 em sucesso ou um código de erro para fracasso.
 
 
-// joining threads - bloqueia a execução de uma thread até o acabamento de uma outra thread - acho que não é até o acabamento de outra, é não finalizar o processo enquanto a thread não finalizou. Nos testes abaixo sem a join, as vezes o programa não executa todas as funções da rotina, enquanto com a Join ele só finaliza quando termina todas as execuções da thread.
+// joining threads - bloqueia a execução de uma thread até o acabamento de uma outra thread - ver learning.c
 // int phtread_join(pthread_t thread, void **retval);
 // thread - o ID da thread pelo qual este deve esperar
 // retval: um ponteiro para uma variável que pode conter o valor de retorno da função de rotina da thread (start_routine). Por enquanto NULL.
@@ -35,9 +36,19 @@
 void	*thread_routine(void *data)
 {
 	pthread_t tid;
+	unsigned int *count;
+	unsigned int i;
 
 	tid = pthread_self();
-	printf("%sThread [%ld]: Sonhos que podemos ter. %s\n", YLW, tid, RESET);
+	count = (unsigned int *) data;
+	printf("%sThread [%ld]: Count at thread start = %u.%s\n", YLW, tid, *count, RESET);
+	i = 0;
+	while (i < TIMES_TO_COUNT)
+	{
+		(*count)++;
+		i++;
+	}
+	printf("%sThread [%ld]: Final count  = %u.%s\n", BYLW, tid, *count, RESET);
 	return (NULL);
 }
 
@@ -45,14 +56,22 @@ int	main(void)
 {
 	pthread_t	tid1;
 	pthread_t	tid2;
+	unsigned int count;
 
-	pthread_create(&tid1, NULL, thread_routine, NULL);
+	count = 0;
+
+	pthread_create(&tid1, NULL, thread_routine, &count);
 	printf("Main: Created first thread [%ld]\n", tid1);
-	pthread_create(&tid2, NULL, thread_routine, NULL);
+	pthread_create(&tid2, NULL, thread_routine, &count);
 	printf("Main: Created second thread [%ld]\n", tid2);
 	pthread_join(tid1, NULL);
 	printf("Main: Joining first thread [%ld]\n", tid1);
 	pthread_join(tid2, NULL);
 	printf("Main: Joining second thread [%ld]\n", tid2);
+	if (count != (2 * TIMES_TO_COUNT))
+		printf("%sMain: ERROR! Total count is %u%s\n", RED, count, RESET);
+	else
+		printf("%sMain: OK. Total count is %u%s\n", GREEN, count, RESET);
 	return (0);
+
 }
