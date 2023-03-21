@@ -6,7 +6,7 @@
 /*   By: izsoares <izsoares@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 12:08:16 by izsoares          #+#    #+#             */
-/*   Updated: 2023/03/21 15:38:11 by izsoares         ###   ########.fr       */
+/*   Updated: 2023/03/21 16:17:14 by izsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@
 # include <pthread.h>
 
 int	ph_atoi(char *str);
+void	verify_args(int argc, char **argv);
 
 #endif

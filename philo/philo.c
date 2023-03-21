@@ -6,13 +6,13 @@
 /*   By: izsoares <izsoares@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:24:03 by izsoares          #+#    #+#             */
-/*   Updated: 2023/03/21 15:50:25 by izsoares         ###   ########.fr       */
+/*   Updated: 2023/03/21 16:17:04 by izsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	char *str;
 	char *str1;
@@ -31,4 +31,6 @@ int	main(void)
 	printf("%d\n", ph_atoi(str2));
 	printf("%d\n", ph_atoi(str3));
 	printf("%d\n", ph_atoi(str4));
+	verify_args(argc, argv);
+
 }
