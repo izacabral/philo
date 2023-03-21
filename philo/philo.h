@@ -6,7 +6,7 @@
 /*   By: izsoares <izsoares@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 12:08:16 by izsoares          #+#    #+#             */
-/*   Updated: 2023/03/16 12:14:26 by izsoares         ###   ########.fr       */
+/*   Updated: 2023/03/21 12:53:08 by izsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,4 +19,3 @@
 # include <unistd.h>
 # include <sys/time.h>
 # include <pthread.h>
-
