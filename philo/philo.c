@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: izsoares <izsoares@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/16 12:08:16 by izsoares          #+#    #+#             */
-/*   Updated: 2023/03/21 15:38:11 by izsoares         ###   ########.fr       */
+/*   Created: 2023/03/21 15:24:03 by izsoares          #+#    #+#             */
+/*   Updated: 2023/03/21 15:50:25 by izsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#include "philo.h"
 
-# define INT_MAX 2147483647
+int	main(void)
+{
+	char *str;
+	char *str1;
+	char *str2;
+	char *str3;
+	char *str4;
 
-# include <string.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <sys/time.h>
-# include <pthread.h>
+	str = "0";
+	str1 = "-3458";
+	str2 = "2147483647";
+	str3 = "34.58";
+	str4 = "21474836489";
 
-int	ph_atoi(char *str);
-
-#endif
+	printf("%d\n", ph_atoi(str));
+	printf("%d\n", ph_atoi(str1));
+	printf("%d\n", ph_atoi(str2));
+	printf("%d\n", ph_atoi(str3));
+	printf("%d\n", ph_atoi(str4));
+}
