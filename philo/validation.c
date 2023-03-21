@@ -6,7 +6,7 @@
 /*   By: izsoares <izsoares@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 12:15:27 by izsoares          #+#    #+#             */
-/*   Updated: 2023/03/21 16:19:14 by izsoares         ###   ########.fr       */
+/*   Updated: 2023/03/21 19:23:40 by izsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,30 @@ void	verify_args(int argc, char **argv)
 	i = 1;
 	if (argc >= 5 && argc <= 6)
 	{
-		while(argv[i] && ph_atoi(argv[i]) >= 1)
-			i++;
+		while(argv[i])
+		{
+			if (ph_atoi(argv[i]) >= 1)
+				i++;
+			else
+			{
+				print_error();
+				exit(EXIT_FAILURE);
+			}
+
+		}
 	}
 	else
-		printf("Invalid Arguments");
+	{
+			print_error();
+			exit(EXIT_FAILURE);
+	}
+}
+
+void	print_error(void)
+{
+	printf("\e[31m---Invalid parameters! Try something like:\n\e[0m");
+	printf("\e[32m./fractais mandelbrot\n\e[0m");
+	printf("\e[32m./fractais julia 0.285 0.01\n\e[0m");
+	printf("\e[32m./fractais julia -0.70176 -0.3842\n\e[0m");
+	printf("\e[32m./fractais julia -0.4 0.6\n\e[0m");
 }

@@ -6,7 +6,7 @@
 /*   By: izsoares <izsoares@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:24:03 by izsoares          #+#    #+#             */
-/*   Updated: 2023/03/21 16:17:04 by izsoares         ###   ########.fr       */
+/*   Updated: 2023/03/21 19:13:35 by izsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(int argc, char **argv)
 	char *str3;
 	char *str4;
 
-	str = "0";
+	str = "-5";
 	str1 = "-3458";
 	str2 = "2147483647";
 	str3 = "34.58";
