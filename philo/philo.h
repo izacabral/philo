@@ -6,7 +6,7 @@
 /*   By: izsoares <izsoares@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 12:08:16 by izsoares          #+#    #+#             */
-/*   Updated: 2023/03/21 19:24:00 by izsoares         ###   ########.fr       */
+/*   Updated: 2023/03/22 13:00:38 by izsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,19 @@
 # include <sys/time.h>
 # include <pthread.h>
 
-int	ph_atoi(char *str);
+typedef struct s_philo
+{
+	int				id;
+	pthread_t		philo;
+	pthread_mutex_t	*left_hashi;
+	pthread_mutex_t	*right_hashi;
+}				t_philo;
+
+void init(int argc, char **argv, t_philo *philos, pthread_mutex_t *hashis);
+
+// validation
+int		ph_atoi(char *str);
 void	verify_args(int argc, char **argv);
 void	print_error(void);
+
 #endif

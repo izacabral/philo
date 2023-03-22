@@ -6,7 +6,7 @@
 /*   By: izsoares <izsoares@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 12:15:27 by izsoares          #+#    #+#             */
-/*   Updated: 2023/03/21 19:23:40 by izsoares         ###   ########.fr       */
+/*   Updated: 2023/03/22 11:11:45 by izsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	verify_args(int argc, char **argv)
 	i = 1;
 	if (argc >= 5 && argc <= 6)
 	{
-		while(argv[i])
+		while (argv[i])
 		{
 			if (ph_atoi(argv[i]) >= 1)
 				i++;
@@ -56,21 +56,18 @@ void	verify_args(int argc, char **argv)
 				print_error();
 				exit(EXIT_FAILURE);
 			}
-
 		}
 	}
 	else
 	{
-			print_error();
-			exit(EXIT_FAILURE);
+		print_error();
+		exit(EXIT_FAILURE);
 	}
 }
 
 void	print_error(void)
 {
 	printf("\e[31m---Invalid parameters! Try something like:\n\e[0m");
-	printf("\e[32m./fractais mandelbrot\n\e[0m");
-	printf("\e[32m./fractais julia 0.285 0.01\n\e[0m");
-	printf("\e[32m./fractais julia -0.70176 -0.3842\n\e[0m");
-	printf("\e[32m./fractais julia -0.4 0.6\n\e[0m");
+	printf("\e[32m./philo <number_of_philosophers> <time_to_die> <time_to_eat>\
+ <time_to_sleep> [number_of_times_each_philosopher_must_eat]\n\e[0m");
 }
