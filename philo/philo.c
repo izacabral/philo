@@ -6,7 +6,7 @@
 /*   By: izsoares <izsoares@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:24:03 by izsoares          #+#    #+#             */
-/*   Updated: 2023/03/22 13:08:30 by izsoares         ###   ########.fr       */
+/*   Updated: 2023/03/23 16:00:09 by izsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,16 @@ void init(int argc, char **argv, t_philo *philos, pthread_mutex_t *hashis)
 		i = 0;
 		while (i <= n_philo - 1)
 		{
-			philos[i].id = i;
+			philos[i].id = i + 1;
 			//printf("%d\n", philos[i].id);
 			pthread_create (&philos[i].philo, NULL, &routine, NULL);
 			philos[i].left_hashi = &hashis[i];
-			//printf("%d\n", philos[i].left_hashi);
+			//printf("philo [%d].left_hashi:%p\n", philos[i].id, philos[i].left_hashi);
 			if (i <= n_philo - 2)
 				philos[i].right_hashi = &hashis[i+1];
 			else
 				philos[i].right_hashi = &hashis[0];
-			//printf("%d\n", philos[i].right_hashi);
+			//printf("philo [%d].right_hashi:%p\n", philos[i].id, philos[i].right_hashi);
 			i++;
 		}
 		i = 0;
@@ -57,6 +57,11 @@ void init(int argc, char **argv, t_philo *philos, pthread_mutex_t *hashis)
 			i++;
 		}
 	}
+}
+
+float time_diff(struct timeval *start, struct timeval *end)
+{
+	return (end->tv_sec - start->tv_sec) + 1e-6*(end->tv_usec - start->tv_usec);
 }
 
 
@@ -81,10 +86,15 @@ int	main(int argc, char **argv)
 	printf("%d\n", ph_atoi(str4)); */
 	t_philo			*philos;
 	pthread_mutex_t	*hashis;
+	struct	timeval start;
+	struct	timeval end;
 
 	philos = NULL;
 	hashis = NULL;
 	verify_args(argc, argv);
+	gettimeofday(&start, NULL);
 	init(argc, argv, philos, hashis);
+	gettimeofday(&end, NULL);
+	printf("%f\n", time_diff(&start, &end));
 
 }
