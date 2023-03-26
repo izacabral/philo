@@ -40,7 +40,7 @@ int	ph_atoi(char *str)
 	return (nb);
 }
 
-void	verify_args(int argc, char **argv)
+int	verify_args(int argc, char **argv)
 {
 	int	i;
 
@@ -52,22 +52,46 @@ void	verify_args(int argc, char **argv)
 			if (ph_atoi(argv[i]) >= 1)
 				i++;
 			else
-			{
-				print_error();
-				exit(EXIT_FAILURE);
-			}
+				return (1);
 		}
 	}
 	else
-	{
-		print_error();
-		exit(EXIT_FAILURE);
-	}
+		return (1);
+	return (0);
 }
 
-void	print_error(void)
+int	set_data(int argc, char **argv, t_data *data)
 {
-	printf("\e[31m---Invalid parameters! Try something like:\n\e[0m");
-	printf("\e[32m./philo <number_of_philosophers> <time_to_die> <time_to_eat>\
- <time_to_sleep> [number_of_times_each_philosopher_must_eat]\n\e[0m");
+	if (verify_args(argc, argv) == 0)
+	{
+		data->number_philos = ph_atoi(argv[1]);
+		data->time_die = ph_atoi(argv[2]);
+		data->time_eat = ph_atoi(argv[3]);
+		data->time_sleep = ph_atoi(argv[4]);
+		if (argc == 6)
+			data->times_eat = ph_atoi(argv[5]);
+		else
+			data->times_eat = 0;
+		return (0);
+	}
+	else
+		return (1);
+}
+
+
+int	print_error(char *str)
+{
+	if (strncmp(str, "input", 6) == 0)
+	{
+		printf("\e[31m---Invalid parameters! Try something like:\n\e[0m");
+		printf("\e[32m./philo <number_of_philosophers> <time_to_die> <time_to_eat>\
+	<time_to_sleep> [number_of_times_each_philosopher_must_eat]\n\e[0m");
+	}
+	else if (strncmp(str, "malloc", 7) == 0)
+		printf("\e[31mMalloc Error!\n\e[0m");
+	else if (strncmp(str, "init", 5) == 0)
+		printf("\e[31mSomething wrong on initialization\n\e[0m");
+	else if (strncmp(str, "join", 5) == 0)
+		printf("\e[31mSomething wrong on joining\n\e[0m");
+	return (0);
 }

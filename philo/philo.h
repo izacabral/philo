@@ -22,19 +22,29 @@
 # include <sys/time.h>
 # include <pthread.h>
 
+typedef struct s_data
+{
+	int			number_philos;
+	long int	time_die;
+	long int	time_eat;
+	long int	time_sleep;
+	long int	times_eat;
+}				t_data;
+
 typedef struct s_philo
 {
 	int				id;
 	pthread_t		philo;
 	pthread_mutex_t	*left_hashi;
 	pthread_mutex_t	*right_hashi;
+	t_data			*data;
 }				t_philo;
 
-void init(int argc, char **argv, t_philo *philos, pthread_mutex_t *hashis);
 
 // validation
 int		ph_atoi(char *str);
-void	verify_args(int argc, char **argv);
-void	print_error(void);
+int		verify_args(int argc, char **argv);
+int		set_data(int argc, char **argv, t_data *data);
+int		print_error(char *str);
 
 #endif

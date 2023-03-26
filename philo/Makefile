@@ -9,9 +9,9 @@ CC		=	cc
 
 RM		=	rm -f
 
-CFLAGS	=	-Wall -Wextra -Werror 
+CFLAGS	=	-Wall -Wextra -Werror -fsanitize=address
 
-.c.o: 
+.c.o:
 			$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
 all:		$(NAME)
