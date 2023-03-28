@@ -6,7 +6,7 @@
 /*   By: izsoares <izsoares@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 12:15:27 by izsoares          #+#    #+#             */
-/*   Updated: 2023/03/22 11:11:45 by izsoares         ###   ########.fr       */
+/*   Updated: 2023/03/28 12:49:03 by izsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int	set_data(int argc, char **argv, t_data *data)
 		data->time_die = ph_atoi(argv[2]);
 		data->time_eat = ph_atoi(argv[3]);
 		data->time_sleep = ph_atoi(argv[4]);
+		data->died = 1;
 		if (argc == 6)
 			data->times_must_eat = ph_atoi(argv[5]);
 		else
