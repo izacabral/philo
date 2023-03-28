@@ -69,9 +69,9 @@ int	set_data(int argc, char **argv, t_data *data)
 		data->time_eat = ph_atoi(argv[3]);
 		data->time_sleep = ph_atoi(argv[4]);
 		if (argc == 6)
-			data->times_eat = ph_atoi(argv[5]);
+			data->times_must_eat = ph_atoi(argv[5]);
 		else
-			data->times_eat = 0;
+			data->times_must_eat = 0;
 		return (0);
 	}
 	else

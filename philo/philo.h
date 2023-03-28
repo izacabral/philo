@@ -24,11 +24,11 @@
 
 typedef struct s_data
 {
-	int			number_philos;
-	long int	time_die;
-	long int	time_eat;
-	long int	time_sleep;
-	long int	times_eat;
+	int number_philos;
+	int	time_die;
+	int	time_eat;
+	int	time_sleep;
+	int	times_must_eat;
 }				t_data;
 
 typedef struct s_philo
@@ -38,6 +38,7 @@ typedef struct s_philo
 	pthread_mutex_t	*left_hashi;
 	pthread_mutex_t	*right_hashi;
 	t_data			*data;
+	unsigned long	time_created;
 }				t_philo;
 
 
