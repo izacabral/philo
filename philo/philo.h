@@ -6,7 +6,7 @@
 /*   By: izsoares <izsoares@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 12:08:16 by izsoares          #+#    #+#             */
-/*   Updated: 2023/03/28 17:59:08 by izsoares         ###   ########.fr       */
+/*   Updated: 2023/03/30 18:48:05 by izsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,39 @@ typedef struct s_philo
 	pthread_mutex_t	*m_print;
 	unsigned long	time_last_meal;
 	pthread_mutex_t	*m_died;
+	int				times_eated;
+	pthread_mutex_t	m_times_eated;
+
 }				t_philo;
 
-
+// times and msgs
 unsigned long	get_time_now(void);
+void	print_msg(t_philo *philo, char *str);
+void	print_msg_died(t_philo *philo, char *str);
+void	smart_sleep(unsigned long time);
+
+// init
+int	malloc_init(t_data *data, pthread_mutex_t	**hashis, t_philo **philos);
+int	init_hashis(t_data *data, pthread_mutex_t *hashis);
+int	init_philos(t_data *data, t_philo *philos, pthread_mutex_t *hashis);
+int philos_join(t_data *data, t_philo *philos);
+
+// routine
+void	take_hashis(t_philo *philo);
+void	is_sleeping(t_philo *philo);
+void	is_thinking(t_philo *philo);
+int		check_is_died(t_philo *philo);
+int	check_is_satisfied(t_philo *philo);
+void	*routine(void *arg);
+
 
 // validation
 int		ph_atoi(char *str);
 int		verify_args(int argc, char **argv);
 int		set_data(int argc, char **argv, t_data *data);
 int		print_error(char *str);
+
+// philo
+void	*monitor(void *arg);
 
 #endif

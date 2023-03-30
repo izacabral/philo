@@ -1,4 +1,7 @@
-SRCS	=	philo.c \
+SRCS	=	init.c \
+			philo.c \
+			routine.c \
+			times_msgs.c \
 			validation.c \
 
 OBJS	=	$(SRCS:.c=.o)
