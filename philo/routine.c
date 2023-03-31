@@ -6,7 +6,7 @@
 /*   By: izsoares <izsoares@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:24:03 by izsoares          #+#    #+#             */
-/*   Updated: 2023/03/30 18:43:07 by izsoares         ###   ########.fr       */
+/*   Updated: 2023/03/31 19:55:53 by izsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	take_hashis(t_philo *philo)
 		philo->time_last_meal = get_time_now();
 		pthread_mutex_lock(&philo->m_times_eated);
 		philo->times_eated++;
+		//printf("times_eated: %d\n", philo->times_eated);
 		pthread_mutex_unlock(&philo->m_times_eated);
 	}
 	if (philo->data->number_philos > 1)
@@ -56,8 +57,6 @@ void	is_thinking(t_philo *philo)
 
 int	check_is_died(t_philo *philo)
 {
-	/* printf("died:\n");
-	printf("died: %d\n", philo->data->died); */
 	pthread_mutex_lock(philo->m_died);
 	if (philo->data->died)
 	{
@@ -74,17 +73,21 @@ int	check_is_died(t_philo *philo)
 int	check_is_satisfied(t_philo *philo)
 {
 	int i;
+	int times;
 
+	times = 0;
 	i = 0;
-	pthread_mutex_lock(&philo->m_times_eated);
-	if (philo->times_eated >= philo->data->times_must_eat)
+	while (i < philo->data->number_philos)
 	{
+		//pthread_mutex_lock(&philo[i].m_times_eated);
+		if (philo[i].times_eated >= philo->data->times_must_eat)
+			times++;
+		//printf("i: %d\n", times);
+		//pthread_mutex_unlock(&philo->m_times_eated);
 		i++;
-		pthread_mutex_unlock(&philo->m_times_eated);
 
 	}
-
-	if (i == philo->data->number_philos)
+	if (times == philo->data->number_philos)
 		return (0);
 	else
 		return (1);
@@ -98,6 +101,7 @@ void	*routine(void *arg)
 	philo = arg;
 	if (philo->id % 2 == 0)
 		usleep(100);
+
 	while (check_is_died(philo))
 	{
 		//if (check_is_died(philo))
@@ -107,6 +111,8 @@ void	*routine(void *arg)
 		//if (check_is_died(philo))
 			is_thinking(philo);
 	}
+
+
 	return (NULL);
 }
 

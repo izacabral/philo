@@ -6,7 +6,7 @@
 /*   By: izsoares <izsoares@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 18:37:47 by izsoares          #+#    #+#             */
-/*   Updated: 2023/03/30 18:40:37 by izsoares         ###   ########.fr       */
+/*   Updated: 2023/03/31 14:38:22 by izsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,10 @@ int	init_hashis(t_data *data, pthread_mutex_t *hashis)
 int	init_philos(t_data *data, t_philo *philos, pthread_mutex_t *hashis)
 {
 	int i;
-
-	i = 0;
 	pthread_mutex_t m_print;
 	pthread_mutex_t m_died;
 
-
+	i = 0;
 	if (pthread_mutex_init(&m_print, NULL) != 0)
 			return (-2);
 	if (pthread_mutex_init(&m_died, NULL) != 0)
