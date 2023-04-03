@@ -30,13 +30,16 @@ void	*monitor(void *arg)
 		}
 		while (i < philo->data->number_philos && check_is_died(&philo[i]))
 		{
+			pthread_mutex_lock(&philo[i].m_time_last_meal);
 			if ((get_time_now() - philo[i].time_last_meal) >= (unsigned long)philo[i].data->time_die)
 			{
-				pthread_mutex_lock(philo->m_died);
+				pthread_mutex_lock(philo[i].m_died);
 				philo[i].data->died = 0;
-				pthread_mutex_unlock(philo->m_died);
+				pthread_mutex_unlock(philo[i].m_died);
 				print_msg_died(&philo[i], "died");
 			}
+			else
+				pthread_mutex_unlock(&philo[i].m_time_last_meal);
 			i++;
 			usleep(200);
 		}

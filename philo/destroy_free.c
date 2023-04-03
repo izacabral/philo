@@ -48,6 +48,8 @@ int	destroy_philos(t_data *data, t_philo *philos)
 		return (-1);
 	while (i < (data->number_philos))
 	{
+		/* if (pthread_mutex_destroy(&philos[i].m_time_last_meal) != 0)
+			return (-1); */
 		if (pthread_mutex_destroy(&philos[i].m_times_eated) != 0)
 			return (-1);
 		i++;

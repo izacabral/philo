@@ -21,6 +21,7 @@ void	*routine(void *arg)
 		usleep(100);
 	while (check_is_died(philo))
 	{
+		//printf("id philo: %d\n", philo->id);
 		take_hashis(philo);
 		is_sleeping(philo);
 		is_thinking(philo);

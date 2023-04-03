@@ -44,6 +44,7 @@ typedef struct s_philo
 	pthread_mutex_t	*right_hashi;
 	t_data			*data;
 	unsigned long	time_last_meal;
+	pthread_mutex_t	m_time_last_meal;
 	pthread_mutex_t	*m_print;
 	pthread_mutex_t	*m_died;
 	int				times_eated;
