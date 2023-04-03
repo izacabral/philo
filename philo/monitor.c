@@ -6,7 +6,7 @@
 /*   By: izsoares <izsoares@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 11:45:05 by izsoares          #+#    #+#             */
-/*   Updated: 2023/04/03 11:46:58 by izsoares         ###   ########.fr       */
+/*   Updated: 2023/04/03 15:26:30 by izsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	*monitor(void *arg)
 	while (check_is_died(philo))
 	{
 		i = 0;
-		if (check_is_satisfied(philo) == 0)
+		if (philo->data->times_must_eat > 0  && check_is_satisfied(philo) == 0)
 		{
 			pthread_mutex_lock(philo->m_died);
 			philo[i].data->died = 0;

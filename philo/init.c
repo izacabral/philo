@@ -6,7 +6,7 @@
 /*   By: izsoares <izsoares@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 18:37:47 by izsoares          #+#    #+#             */
-/*   Updated: 2023/04/03 11:34:48 by izsoares         ###   ########.fr       */
+/*   Updated: 2023/04/03 15:18:51 by izsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	init_philos(t_data *data, t_philo *philos, pthread_mutex_t *hashis)
 	int	i;
 
 	i = 0;
+
 	if (pthread_mutex_init(&data->m_print, NULL) != 0)
 		return (-1);
 	if (pthread_mutex_init(&data->m_died, NULL) != 0)
@@ -63,6 +64,7 @@ int	init_philos(t_data *data, t_philo *philos, pthread_mutex_t *hashis)
 		philos[i].times_eated = 0;
 		if (pthread_mutex_init(&philos[i].m_times_eated, NULL) != 0)
 			return (-3);
+		usleep (10);
 		i++;
 	}
 	if (pthread_create(&data->monitor, NULL, &monitor, philos) != 0)
