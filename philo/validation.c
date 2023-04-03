@@ -6,7 +6,7 @@
 /*   By: izsoares <izsoares@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 12:15:27 by izsoares          #+#    #+#             */
-/*   Updated: 2023/03/28 17:58:52 by izsoares         ###   ########.fr       */
+/*   Updated: 2023/04/03 11:16:46 by izsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ int	set_data(int argc, char **argv, t_data *data)
 		return (1);
 }
 
-
 int	print_error(char *str)
 {
 	if (strncmp(str, "input", 6) == 0)
@@ -95,5 +94,7 @@ int	print_error(char *str)
 		printf("\e[31mSomething wrong on initialization\n\e[0m");
 	else if (strncmp(str, "join", 5) == 0)
 		printf("\e[31mSomething wrong on joining\n\e[0m");
+	else if (strncmp(str, "end", 4) == 0)
+		printf("\e[31mSomething wrong in the end\n\e[0m");
 	return (0);
 }

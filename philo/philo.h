@@ -6,7 +6,7 @@
 /*   By: izsoares <izsoares@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 12:08:16 by izsoares          #+#    #+#             */
-/*   Updated: 2023/03/30 18:48:05 by izsoares         ###   ########.fr       */
+/*   Updated: 2023/04/03 11:48:39 by izsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ typedef struct s_data
 	int	times_must_eat;
 	int	died;
 	unsigned long	time_created;
+	pthread_mutex_t m_print;
+	pthread_mutex_t m_died;
 	pthread_t	monitor;
 }				t_data;
 
@@ -41,19 +43,18 @@ typedef struct s_philo
 	pthread_mutex_t	*left_hashi;
 	pthread_mutex_t	*right_hashi;
 	t_data			*data;
-	pthread_mutex_t	*m_print;
 	unsigned long	time_last_meal;
+	pthread_mutex_t	*m_print;
 	pthread_mutex_t	*m_died;
 	int				times_eated;
 	pthread_mutex_t	m_times_eated;
-
 }				t_philo;
 
-// times and msgs
-unsigned long	get_time_now(void);
-void	print_msg(t_philo *philo, char *str);
-void	print_msg_died(t_philo *philo, char *str);
-void	smart_sleep(unsigned long time);
+// validation
+int		ph_atoi(char *str);
+int		verify_args(int argc, char **argv);
+int		set_data(int argc, char **argv, t_data *data);
+int		print_error(char *str);
 
 // init
 int	malloc_init(t_data *data, pthread_mutex_t	**hashis, t_philo **philos);
@@ -62,21 +63,30 @@ int	init_philos(t_data *data, t_philo *philos, pthread_mutex_t *hashis);
 int philos_join(t_data *data, t_philo *philos);
 
 // routine
+void	*routine(void *arg);
 void	take_hashis(t_philo *philo);
 void	is_sleeping(t_philo *philo);
 void	is_thinking(t_philo *philo);
-int		check_is_died(t_philo *philo);
-int	check_is_satisfied(t_philo *philo);
-void	*routine(void *arg);
 
-
-// validation
-int		ph_atoi(char *str);
-int		verify_args(int argc, char **argv);
-int		set_data(int argc, char **argv, t_data *data);
-int		print_error(char *str);
-
-// philo
+// monitor
 void	*monitor(void *arg);
+int		check_is_died(t_philo *philo);
+int		check_is_satisfied(t_philo *philo);
+
+// times and msgs
+unsigned long	get_time_now(void);
+void	print_msg(t_philo *philo, char *str);
+void	print_msg_died(t_philo *philo, char *str);
+void	smart_sleep(unsigned long time);
+
+
+
+
+
+
+// destroy_free
+int	free_end(t_data *data, pthread_mutex_t	**hashis, t_philo **philos);
+int	destroy_hashis(t_data *data, pthread_mutex_t *hashis);
+int	destroy_philos(t_data *data, t_philo *philos);
 
 #endif

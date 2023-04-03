@@ -1,8 +1,10 @@
-SRCS	=	init.c \
-			philo.c \
-			routine.c \
-			times_msgs.c \
+SRCS	=	philo.c \
 			validation.c \
+			init.c \
+			routine.c \
+			monitor.c \
+			times_msgs.c \
+			destroy_free.c \
 
 OBJS	=	$(SRCS:.c=.o)
 
