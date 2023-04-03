@@ -42,7 +42,6 @@ int	init_philos(t_data *data, t_philo *philos, pthread_mutex_t *hashis)
 	int	i;
 
 	i = 0;
-
 	if (pthread_mutex_init(&data->m_print, NULL) != 0)
 		return (-1);
 	if (pthread_mutex_init(&data->m_died, NULL) != 0)
@@ -50,8 +49,6 @@ int	init_philos(t_data *data, t_philo *philos, pthread_mutex_t *hashis)
 	while (i <= (data->number_philos -1))
 	{
 		philos[i].id = i + 1;
-		if (pthread_create(&philos[i].philo, NULL, &routine, &philos[i]) != 0)
-			return (-2);
 		philos[i].left_hashi = &hashis[i];
 		if (i <= (data->number_philos - 2))
 			philos[i].right_hashi = &hashis[i + 1];
@@ -65,6 +62,14 @@ int	init_philos(t_data *data, t_philo *philos, pthread_mutex_t *hashis)
 		if (pthread_mutex_init(&philos[i].m_times_eated, NULL) != 0)
 			return (-3);
 		usleep (10);
+		i++;
+	}
+
+	i = 0;
+	while (i <= (data->number_philos -1))
+	{
+		if (pthread_create(&philos[i].philo, NULL, &routine, &philos[i]) != 0)
+			return (-2);
 		i++;
 	}
 	if (pthread_create(&data->monitor, NULL, &monitor, philos) != 0)
