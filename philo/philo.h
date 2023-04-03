@@ -70,7 +70,7 @@ void	is_thinking(t_philo *philo);
 
 // monitor
 void	*monitor(void *arg);
-int		check_is_died(t_philo *philo);
+int	check_is_died(t_philo *philo);
 int		check_is_satisfied(t_philo *philo);
 
 // times and msgs

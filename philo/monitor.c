@@ -47,6 +47,7 @@ void	*monitor(void *arg)
 
 int	check_is_died(t_philo *philo)
 {
+
 	pthread_mutex_lock(philo->m_died);
 	if (philo->data->died)
 	{
@@ -58,6 +59,7 @@ int	check_is_died(t_philo *philo)
 		pthread_mutex_unlock(philo->m_died);
 		return (0);
 	}
+	return (1);
 }
 
 int	check_is_satisfied(t_philo *philo)
