@@ -6,7 +6,7 @@
 /*   By: izsoares <izsoares@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 12:08:16 by izsoares          #+#    #+#             */
-/*   Updated: 2023/04/04 18:57:29 by izsoares         ###   ########.fr       */
+/*   Updated: 2023/04/04 19:14:25 by izsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,12 @@ int				set_data(int argc, char **argv, t_data *data);
 int				print_error(char *str);
 
 // init
-int				malloc_init(t_data *data, pthread_mutex_t **hashis, t_philo **philos);
-int				init_mutexes(t_data *data, pthread_mutex_t *hashis, t_philo *philos);
-int				init_philos(t_data *data, t_philo *philos, pthread_mutex_t *hashis);
+int				malloc_init(t_data *data, pthread_mutex_t **hashis,
+					t_philo **philos);
+int				init_mutexes(t_data *data, pthread_mutex_t *hashis,
+					t_philo *philos);
+int				init_philos(t_data *data, t_philo *philos,
+					pthread_mutex_t *hashis);
 int				init_threads(t_data *data, t_philo *philos);
 int				threads_join(t_data *data, t_philo *philos);
 
@@ -73,6 +76,7 @@ void			*monitor(void *arg);
 int				check_is_died(t_philo *philo);
 int				check_is_satisfied(t_philo *philo);
 int				check_must_eat(t_philo *philo);
+void			set_monitor(t_philo *philo, int i);
 
 // times and msgs
 unsigned long	get_time_now(void);
@@ -81,6 +85,8 @@ void			print_msg_died(t_philo *philo, char *str);
 void			smart_sleep(unsigned long time);
 
 // destroy_free
-int				free_end(t_data *data, pthread_mutex_t	**hashis, t_philo **philos);
-int				destroy_mutexes(t_data *data, pthread_mutex_t *hashis, t_philo *philos);
+int				free_end(t_data *data, pthread_mutex_t	**hashis,
+					t_philo **philos);
+int				destroy_mutexes(t_data *data, pthread_mutex_t *hashis,
+					t_philo *philos);
 #endif
