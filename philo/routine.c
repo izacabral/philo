@@ -6,7 +6,7 @@
 /*   By: izsoares <izsoares@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:24:03 by izsoares          #+#    #+#             */
-/*   Updated: 2023/04/04 15:09:17 by izsoares         ###   ########.fr       */
+/*   Updated: 2023/04/04 18:58:41 by izsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	*routine(void *arg)
 {
-	t_philo *philo;
+	t_philo	*philo;
 
 	philo = arg;
 	if (philo->id % 2 == 0)
-		usleep(philo->data->time_eat);
+		usleep(100);
 	while (check_is_died(philo))
 	{
 		take_hashis(philo);
@@ -58,7 +58,10 @@ void	is_sleeping(t_philo *philo)
 	if (philo->data->number_philos > 1)
 	{
 		print_msg(philo, "is sleeping");
-		smart_sleep(philo->data->time_sleep);
+		if (philo->data->time_sleep >= philo->data->time_die)
+			smart_sleep(philo->data->time_die);
+		else
+			smart_sleep(philo->data->time_sleep);
 	}
 }
 
@@ -67,7 +70,3 @@ void	is_thinking(t_philo *philo)
 	if (philo->data->number_philos > 1)
 		print_msg(philo, "is thinking");
 }
-
-
-
-

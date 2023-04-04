@@ -6,7 +6,7 @@
 /*   By: izsoares <izsoares@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 18:37:47 by izsoares          #+#    #+#             */
-/*   Updated: 2023/04/04 15:32:41 by izsoares         ###   ########.fr       */
+/*   Updated: 2023/04/04 17:41:12 by izsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,7 @@ int	init_philos(t_data *data, t_philo *philos, pthread_mutex_t *hashis)
 			philos[i].right_hashi = &hashis[0];
 		philos[i].data = data;
 		philos[i].time_last_meal = get_time_now();
-		philos[i].m_print = &data->m_print;
-		philos[i].m_died = &data->m_died;
 		philos[i].times_eated = 0;
-		usleep (10);
 		i++;
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: izsoares <izsoares@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 11:45:05 by izsoares          #+#    #+#             */
-/*   Updated: 2023/04/04 15:43:43 by izsoares         ###   ########.fr       */
+/*   Updated: 2023/04/04 18:47:31 by izsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,22 @@
 
 void	*monitor(void *arg)
 {
-	t_philo *philo;
-	int i;
+	t_philo	*philo;
+	int		i;
 
 	philo = arg;
 	while (check_is_died(philo))
 	{
 		i = 0;
-		if (philo->data->times_must_eat > 0  && check_is_satisfied(philo) == 0)
-		{
-			pthread_mutex_lock(&philo->data->m_died);
-			philo[i].data->died = 0;
-			pthread_mutex_unlock(&philo->data->m_died);
+		if (check_must_eat(philo))
 			return (NULL);
-		}
 		while (i < philo->data->number_philos && check_is_died(&philo[i]))
 		{
 			pthread_mutex_lock(&philo[i].m_time_last_meal);
-			if ((get_time_now() - philo[i].time_last_meal) >= (unsigned long)philo[i].data->time_die)
+			if ((get_time_now() - philo[i].time_last_meal) >= \
+					(unsigned long)philo[i].data->time_die)
 			{
+				pthread_mutex_unlock(&philo[i].m_time_last_meal);
 				pthread_mutex_lock(&philo[i].data->m_died);
 				philo[i].data->died = 0;
 				pthread_mutex_unlock(&philo[i].data->m_died);
@@ -41,25 +38,22 @@ void	*monitor(void *arg)
 			else
 				pthread_mutex_unlock(&philo[i].m_time_last_meal);
 			i++;
-			usleep(200);
 		}
-		usleep(200);
 	}
 	return (NULL);
 }
 
 int	check_is_died(t_philo *philo)
 {
-
-	pthread_mutex_lock(philo->m_died);
+	pthread_mutex_lock(&philo->data->m_died);
 	if (philo->data->died)
 	{
-		pthread_mutex_unlock(philo->m_died);
+		pthread_mutex_unlock(&philo->data->m_died);
 		return (1);
 	}
 	else
 	{
-		pthread_mutex_unlock(philo->m_died);
+		pthread_mutex_unlock(&philo->data->m_died);
 		return (0);
 	}
 	return (1);
@@ -67,8 +61,8 @@ int	check_is_died(t_philo *philo)
 
 int	check_is_satisfied(t_philo *philo)
 {
-	int i;
-	int times;
+	int	i;
+	int	times;
 
 	times = 0;
 	i = 0;
@@ -79,10 +73,22 @@ int	check_is_satisfied(t_philo *philo)
 			times++;
 		pthread_mutex_unlock(&philo[i].m_times_eated);
 		i++;
-
 	}
 	if (times == philo->data->number_philos)
 		return (0);
 	else
 		return (-1);
+}
+
+int	check_must_eat(t_philo *philo)
+{
+	if (philo->data->times_must_eat > 0 && check_is_satisfied(philo) == 0)
+	{
+		pthread_mutex_lock(&philo->data->m_died);
+		philo->data->died = 0;
+		pthread_mutex_unlock(&philo->data->m_died);
+		return (1);
+	}
+	else
+		return (0);
 }

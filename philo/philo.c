@@ -6,7 +6,7 @@
 /*   By: izsoares <izsoares@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:24:03 by izsoares          #+#    #+#             */
-/*   Updated: 2023/04/04 12:04:47 by izsoares         ###   ########.fr       */
+/*   Updated: 2023/04/04 18:47:57 by izsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,3 @@ int	main(int argc, char **argv)
 		return (print_error("end"));
 	return (0);
 }
-
