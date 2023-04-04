@@ -6,7 +6,7 @@
 /*   By: izsoares <izsoares@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 12:08:16 by izsoares          #+#    #+#             */
-/*   Updated: 2023/04/03 11:48:39 by izsoares         ###   ########.fr       */
+/*   Updated: 2023/04/04 12:23:52 by izsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ typedef struct s_data
 typedef struct s_philo
 {
 	int				id;
-	pthread_t		philo;
 	pthread_mutex_t	*left_hashi;
 	pthread_mutex_t	*right_hashi;
 	t_data			*data;
@@ -49,6 +48,7 @@ typedef struct s_philo
 	pthread_mutex_t	*m_died;
 	int				times_eated;
 	pthread_mutex_t	m_times_eated;
+	pthread_t		philo;
 }				t_philo;
 
 // validation
@@ -59,9 +59,10 @@ int		print_error(char *str);
 
 // init
 int	malloc_init(t_data *data, pthread_mutex_t	**hashis, t_philo **philos);
-int	init_hashis(t_data *data, pthread_mutex_t *hashis);
+int	init_mutexes(t_data *data, pthread_mutex_t *hashis, t_philo *philos);
 int	init_philos(t_data *data, t_philo *philos, pthread_mutex_t *hashis);
-int philos_join(t_data *data, t_philo *philos);
+int	init_threads(t_data *data, t_philo *philos);
+int threads_join(t_data *data, t_philo *philos);
 
 // routine
 void	*routine(void *arg);

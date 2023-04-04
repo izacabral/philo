@@ -6,7 +6,7 @@
 /*   By: izsoares <izsoares@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 18:31:25 by izsoares          #+#    #+#             */
-/*   Updated: 2023/03/30 18:31:44 by izsoares         ###   ########.fr       */
+/*   Updated: 2023/04/04 15:15:12 by izsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	print_msg(t_philo *philo, char *str)
 	if (philo->data->died)
 		printf("%lld %d %s\n", milesec, philo->id, str);
 	pthread_mutex_unlock(philo->m_print);
-
 }
 
 void	print_msg_died(t_philo *philo, char *str)
@@ -39,7 +38,6 @@ void	print_msg_died(t_philo *philo, char *str)
 	pthread_mutex_lock(philo->m_print);
 	printf("%lld %d %s\n", milesec, philo->id, str);
 	pthread_mutex_unlock(philo->m_print);
-
 }
 
 void	smart_sleep(unsigned long time)

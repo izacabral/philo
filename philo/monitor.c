@@ -6,7 +6,7 @@
 /*   By: izsoares <izsoares@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 11:45:05 by izsoares          #+#    #+#             */
-/*   Updated: 2023/04/03 15:26:30 by izsoares         ###   ########.fr       */
+/*   Updated: 2023/04/04 15:43:43 by izsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	*monitor(void *arg)
 		i = 0;
 		if (philo->data->times_must_eat > 0  && check_is_satisfied(philo) == 0)
 		{
-			pthread_mutex_lock(philo->m_died);
+			pthread_mutex_lock(&philo->data->m_died);
 			philo[i].data->died = 0;
-			pthread_mutex_unlock(philo->m_died);
+			pthread_mutex_unlock(&philo->data->m_died);
 			return (NULL);
 		}
 		while (i < philo->data->number_philos && check_is_died(&philo[i]))
@@ -33,9 +33,9 @@ void	*monitor(void *arg)
 			pthread_mutex_lock(&philo[i].m_time_last_meal);
 			if ((get_time_now() - philo[i].time_last_meal) >= (unsigned long)philo[i].data->time_die)
 			{
-				pthread_mutex_lock(philo[i].m_died);
+				pthread_mutex_lock(&philo[i].data->m_died);
 				philo[i].data->died = 0;
-				pthread_mutex_unlock(philo[i].m_died);
+				pthread_mutex_unlock(&philo[i].data->m_died);
 				print_msg_died(&philo[i], "died");
 			}
 			else
@@ -74,10 +74,10 @@ int	check_is_satisfied(t_philo *philo)
 	i = 0;
 	while (i < philo->data->number_philos)
 	{
-		//pthread_mutex_lock(&philo[i].m_times_eated);
+		pthread_mutex_lock(&philo[i].m_times_eated);
 		if (philo[i].times_eated >= philo->data->times_must_eat)
 			times++;
-		//pthread_mutex_unlock(&philo->m_times_eated);
+		pthread_mutex_unlock(&philo[i].m_times_eated);
 		i++;
 
 	}

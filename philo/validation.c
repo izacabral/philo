@@ -6,7 +6,7 @@
 /*   By: izsoares <izsoares@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 12:15:27 by izsoares          #+#    #+#             */
-/*   Updated: 2023/04/03 15:21:23 by izsoares         ###   ########.fr       */
+/*   Updated: 2023/04/04 12:01:02 by izsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,12 @@ int	set_data(int argc, char **argv, t_data *data)
 		data->time_die = ph_atoi(argv[2]);
 		data->time_eat = ph_atoi(argv[3]);
 		data->time_sleep = ph_atoi(argv[4]);
-		data->died = 1;
-		data->time_created = get_time_now();
 		if (argc == 6)
 			data->times_must_eat = ph_atoi(argv[5]);
 		else
 			data->times_must_eat = 0;
+		data->died = 1;
+		data->time_created = get_time_now();
 		return (0);
 	}
 	else
@@ -90,8 +90,12 @@ int	print_error(char *str)
 	}
 	else if (strncmp(str, "malloc", 7) == 0)
 		printf("\e[31mMalloc Error!\n\e[0m");
-	else if (strncmp(str, "init", 5) == 0)
-		printf("\e[31mSomething wrong on initialization\n\e[0m");
+	else if (strncmp(str, "mutexes", 8) == 0)
+		printf("\e[31mSomething wrong on Mutexes initialization!\n\e[0m");
+	else if (strncmp(str, "philos", 7) == 0)
+		printf("\e[31mSomething wrong on Philos initialization\n\e[0m");
+	else if (strncmp(str, "threads", 8) == 0)
+		printf("\e[31mSomething wrong on Threads creation\n\e[0m");
 	else if (strncmp(str, "join", 5) == 0)
 		printf("\e[31mSomething wrong on joining\n\e[0m");
 	else if (strncmp(str, "end", 4) == 0)

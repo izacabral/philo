@@ -6,7 +6,7 @@
 /*   By: izsoares <izsoares@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:24:03 by izsoares          #+#    #+#             */
-/*   Updated: 2023/04/03 11:45:48 by izsoares         ###   ########.fr       */
+/*   Updated: 2023/04/04 12:04:47 by izsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,13 @@ int	main(int argc, char **argv)
 		return (print_error("input"));
 	if (malloc_init(&data, &hashis, &philos) != 0)
 		return (print_error("malloc"));
-	if (init_hashis(&data, hashis) != 0)
-		return (print_error("init"));
+	if (init_mutexes(&data, hashis, philos) != 0)
+		return (print_error("mutexes"));
 	if (init_philos(&data, philos, hashis) != 0)
-		return (print_error("init"));
-	if (philos_join(&data, philos) != 0)
+		return (print_error("philos"));
+	if (init_threads(&data, philos) != 0)
+		return (print_error("threads"));
+	if (threads_join(&data, philos) != 0)
 		return (print_error("join"));
 	if (free_end(&data, &hashis, &philos) != 0)
 		return (print_error("end"));
