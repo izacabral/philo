@@ -6,7 +6,7 @@
 /*   By: izsoares <izsoares@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 11:45:05 by izsoares          #+#    #+#             */
-/*   Updated: 2023/04/04 19:21:39 by izsoares         ###   ########.fr       */
+/*   Updated: 2023/04/05 13:33:22 by izsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,9 @@ void	*monitor(void *arg)
 			else
 				pthread_mutex_unlock(&philo[i].m_time_last_meal);
 			i++;
+			usleep(100);
 		}
+		usleep(100);
 	}
 	return (NULL);
 }
