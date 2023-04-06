@@ -6,7 +6,7 @@
 /*   By: izsoares <izsoares@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:24:03 by izsoares          #+#    #+#             */
-/*   Updated: 2023/04/04 18:47:57 by izsoares         ###   ########.fr       */
+/*   Updated: 2023/04/06 14:41:46 by izsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	main(int argc, char **argv)
 		return (print_error("philos"));
 	if (init_threads(&data, philos) != 0)
 		return (print_error("threads"));
+	monitor (philos);
 	if (threads_join(&data, philos) != 0)
 		return (print_error("join"));
 	if (free_end(&data, &hashis, &philos) != 0)

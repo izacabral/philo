@@ -6,7 +6,7 @@
 /*   By: izsoares <izsoares@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 18:31:25 by izsoares          #+#    #+#             */
-/*   Updated: 2023/04/04 19:03:01 by izsoares         ###   ########.fr       */
+/*   Updated: 2023/04/06 15:22:58 by izsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ void	print_msg(t_philo *philo, char *str)
 {
 	long long	milesec;
 
+	pthread_mutex_lock(&philo->data->m_print);
 	milesec = get_time_now() - philo->data->time_created;
+	pthread_mutex_unlock(&philo->data->m_print);
 	pthread_mutex_lock(&philo->data->m_died);
 	if (philo->data->died)
 	{
@@ -41,7 +43,9 @@ void	print_msg_died(t_philo *philo, char *str)
 {
 	long long	milesec;
 
+	pthread_mutex_lock(&philo->data->m_print);
 	milesec = get_time_now() - philo->data->time_created;
+	pthread_mutex_unlock(&philo->data->m_print);
 	pthread_mutex_lock(&philo->data->m_print);
 	printf("%lld %d %s\n", milesec, philo->id, str);
 	pthread_mutex_unlock(&philo->data->m_print);

@@ -6,7 +6,7 @@
 /*   By: izsoares <izsoares@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:24:03 by izsoares          #+#    #+#             */
-/*   Updated: 2023/04/04 18:58:41 by izsoares         ###   ########.fr       */
+/*   Updated: 2023/04/06 15:31:47 by izsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	take_hashis(t_philo *philo)
 	if (philo->data->number_philos > 1)
 		smart_sleep(philo->data->time_eat);
 	else
-		smart_sleep((philo->data->time_die + 10));
+		smart_sleep((philo->data->time_die ));
 	if (philo->data->number_philos > 1)
 		pthread_mutex_unlock(philo->right_hashi);
 	pthread_mutex_unlock(philo->left_hashi);
