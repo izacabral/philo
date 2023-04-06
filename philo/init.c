@@ -6,7 +6,7 @@
 /*   By: izsoares <izsoares@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 18:37:47 by izsoares          #+#    #+#             */
-/*   Updated: 2023/04/06 15:11:20 by izsoares         ###   ########.fr       */
+/*   Updated: 2023/04/06 16:39:15 by izsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,6 @@ int	init_threads(t_data *data, t_philo *philos)
 	int	i;
 
 	i = 0;
-	//if (pthread_create(&data->monitor, NULL, &monitor, philos) != 0)
-		//return (-1);
 	while (i < (data->number_philos))
 	{
 		if (pthread_create(&philos[i].philo, NULL, &routine, &philos[i]) != 0)
@@ -87,8 +85,6 @@ int	threads_join(t_data *data, t_philo *philos)
 	int	i;
 
 	i = 0;
-	/* if (pthread_join(data->monitor, NULL) != 0)
-		return (-3); */
 	while (i < data->number_philos)
 	{
 		if (pthread_join(philos[i].philo, NULL) != 0)

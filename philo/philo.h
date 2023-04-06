@@ -6,7 +6,7 @@
 /*   By: izsoares <izsoares@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 12:08:16 by izsoares          #+#    #+#             */
-/*   Updated: 2023/04/06 14:41:57 by izsoares         ###   ########.fr       */
+/*   Updated: 2023/04/06 16:39:42 by izsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ typedef struct s_data
 	unsigned long	time_created;
 	pthread_mutex_t	m_print;
 	pthread_mutex_t	m_died;
-	//pthread_t		monitor;
 }				t_data;
 
 typedef struct s_philo
